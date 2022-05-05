@@ -125,12 +125,12 @@ class OAuthApiController extends ApiController {
 
 		try {
 			/** @var \OCA\OAuth2\Db\Client $client */
-			$client = $this->clientMapper->findByIdentifier($_SERVER['PHP_AUTH_USER']);
+			$client = $this->clientMapper->findByIdentifier(\trim($_SERVER['PHP_AUTH_USER']));
 		} catch (DoesNotExistException $exception) {
 			return new JSONResponse(['error' => 'invalid_client'], Http::STATUS_BAD_REQUEST);
 		}
 
-		if (\strcmp($client->getSecret(), $_SERVER['PHP_AUTH_PW']) !== 0) {
+		if (\strcmp(\trim($client->getSecret()), \trim($_SERVER['PHP_AUTH_PW'])) !== 0) {
 			return new JSONResponse(['error' => 'invalid_client'], Http::STATUS_BAD_REQUEST);
 		}
 

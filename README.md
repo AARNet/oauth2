@@ -50,3 +50,9 @@ Since no user passwords are handled by the app at all only master key encryption
 
 ## Possible improvements
 - [ ] Add option for using different [scopes](https://tools.ietf.org/html/rfc6749#section-3.3).
+
+## How to build
+
+```
+docker run --rm -it -v $PWD:/app/oauth2 composer sh -c 'cd oauth2 && apk add gmp-dev icu-dev && docker-php-ext-install gmp intl && make dist'
+```
